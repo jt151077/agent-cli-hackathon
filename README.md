@@ -41,7 +41,7 @@ agents-cli install
 Test the agent with a local web server:
 
 ```bash
-adk web
+adk web --allow_origins "*"
 ```
 
 
