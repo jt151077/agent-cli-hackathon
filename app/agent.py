@@ -14,31 +14,45 @@
 # limitations under the License.
 
 from google.adk.agents import Agent
+from google.adk.tools.agent_tool import AgentTool
 from google.adk.apps import App
 from google.adk.models import Gemini
 from google.adk.tools import google_search
 from google.genai import types
 
+from .tourist_agent import tourist_agent
+
 import os
 import google.auth
 
 _, project_id = google.auth.default()
+# Handle specific environment issues where the default project lacks API access
+if project_id == "cloudshell-gca":
+    project_id = "jeremy-k3c0v5rg"
+
 os.environ["GOOGLE_CLOUD_PROJECT"] = project_id
 os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 
-
+search_agent = Agent(
+    name="search_agent",
+    model=Gemini(model="gemini-2.5-flash"),
+    instruction="You are a specialist in Google Search. Use the search tool to find information.",
+    tools=[google_search],
+)
 
 root_agent = Agent(
     name="root_agent",
     model=Gemini(
-        model="gemini-flash-latest",
+        model="gemini-2.5-flash",
         retry_options=types.HttpRetryOptions(attempts=3),
     ),
     instruction="""
-      You are a Google search expert. Help answer the user questions to your best ability by leverage `google_search`.
+      You are a helpful travel assistant.
+      * For general information or web searches, use the search_agent.
+      * For any questions about visiting cities, tourism, or travel recommendations, you MUST use the tourist_agent.
     """,
-    tools=[google_search],
+    tools=[AgentTool(search_agent), AgentTool(tourist_agent)],
 )
 
 app = App(

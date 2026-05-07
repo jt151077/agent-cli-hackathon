@@ -5,7 +5,7 @@ Agent generated with `agents-cli` version `0.1.2`
 
 ## Architecture
 
-![Architecture Diagram](imgs/img0.png)
+![Architecture Diagram](imgs/img1.png)
 
 ## Project Structure
 
