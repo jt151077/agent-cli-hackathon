@@ -13,17 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+import google.auth
 from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 from google.adk.apps import App
 from google.adk.models import Gemini
 from google.adk.tools import google_search
 from google.genai import types
-
-from .tourist_agent import tourist_agent
-
-import os
-import google.auth
 
 _, project_id = google.auth.default()
 # Handle specific environment issues where the default project lacks API access
@@ -33,6 +30,8 @@ if project_id == "cloudshell-gca":
 os.environ["GOOGLE_CLOUD_PROJECT"] = project_id
 os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
+
+from .tourist_agent import tourist_agent
 
 search_agent = Agent(
     name="search_agent",
@@ -50,7 +49,7 @@ root_agent = Agent(
     instruction="""
       You are a helpful travel assistant.
       * For general information or web searches, use the search_agent.
-      * For any questions about visiting cities, tourism, or travel recommendations, you MUST use the tourist_agent.
+      * For any questions about visiting cities, tourism, travel recommendations, or weather in a city, you MUST use the tourist_agent.
     """,
     tools=[AgentTool(search_agent), AgentTool(tourist_agent)],
 )

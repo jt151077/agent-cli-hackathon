@@ -5,7 +5,7 @@ Agent generated with `agents-cli` version `0.1.2`
 
 ## Architecture
 
-![Architecture Diagram](imgs/img1.png)
+![Architecture Diagram](imgs/img2.png)
 
 ## Project Structure
 
@@ -83,3 +83,5 @@ To set up your production infrastructure, run `agents-cli infra cicd`.
 ## Observability
 
 Built-in telemetry exports to Cloud Trace, BigQuery, and Cloud Logging.
+
+

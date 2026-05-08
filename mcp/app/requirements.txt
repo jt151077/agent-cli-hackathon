@@ -1,0 +1,7 @@
+mcp
+httpx
+uvicorn
+starlette
+google-cloud-secret-manager
+google-adk>=1.15.0,<2.0.0
+google-cloud-aiplatform[agent-engines]>=1.130.0

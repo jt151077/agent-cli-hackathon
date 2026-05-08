@@ -1,0 +1,795 @@
+{
+  "eval_set_result_id": "app_basic_eval_1778163095.2536554",
+  "eval_set_result_name": "app_basic_eval_1778163095.2536554",
+  "eval_set_id": "basic_eval",
+  "eval_case_results": [
+    {
+      "eval_set_file": "basic_eval",
+      "eval_set_id": "basic_eval",
+      "eval_id": "weather_query",
+      "final_eval_status": 1,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [
+        {
+          "metric_name": "rubric_based_final_response_quality_v1",
+          "threshold": 0.8,
+          "criterion": {
+            "threshold": 0.8,
+            "judgeModelOptions": {
+              "judgeModel": "gemini-flash-latest",
+              "numSamples": 1
+            },
+            "rubrics": [
+              {
+                "rubricId": "relevance",
+                "rubricContent": {
+                  "textProperty": "The response directly addresses the user's query."
+                }
+              },
+              {
+                "rubricId": "helpfulness",
+                "rubricContent": {
+                  "textProperty": "The response is helpful and provides useful information."
+                }
+              }
+            ]
+          },
+          "custom_function_path": null,
+          "score": 1.0,
+          "eval_status": 1,
+          "details": {
+            "rubric_scores": [
+              {
+                "rubric_id": "relevance",
+                "rationale": "This is an aggregated score derived from individual entries. Please refer to individual entries in each invocation for actual rationale from the model.",
+                "score": 1.0
+              },
+              {
+                "rubric_id": "helpfulness",
+                "rationale": "This is an aggregated score derived from individual entries. Please refer to individual entries in each invocation for actual rationale from the model.",
+                "score": 1.0
+              }
+            ]
+          }
+        }
+      ],
+      "eval_metric_result_per_invocation": [
+        {
+          "actual_invocation": {
+            "invocation_id": "e-65e8da69-756b-4390-88ab-e3e20fa28472",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "What's the weather like in San Francisco?",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "The current weather in San Francisco, California is cloudy with a temperature of 54°F (12°C), feeling like 52°F (11°C). The humidity is around 90%, and there's a 10% chance of rain. The local time is 7:11 AM.\n\nFor today, Thursday, May 7, 2026, the forecast predicts a sunny day with partly cloudy skies at night. Temperatures are expected to range between 54°F (12°C) and 62°F (17°C), with humidity around 81%. There is a 10% chance of rain throughout the day and night.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "intermediate_data": {
+              "invocation_events": [
+                {
+                  "author": "root_agent",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": {
+                          "id": "adk-1e29fe3f-c072-48c5-9f60-8b9dac4ebcab",
+                          "args": {
+                            "request": "weather in San Francisco"
+                          },
+                          "name": "search_agent",
+                          "partial_args": null,
+                          "will_continue": null
+                        },
+                        "function_response": null,
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": "CtECAY89a1-fUEanIoRnQCBkBkHpxqtkJNqBlAqn-7mQdIGIPDA-fRRgj57m7KFQAo2hNTk5QaK7oadTMgSU2k9wCZggN_Z_Ib8-pjoi10vAwonVLlG9Dcn0qwjbsiGom5256WbAba-1m_Ql9x0bJuzcf1k0TI1oBOpwtTXRpZVZuxL1xTzF4q9INYyFZMcG8SHzFnYZfznKD37weH-0lW8U7HFVt7KlQ6SksFu6l2zCUNoXTUlHBjBozj2doWXs1IqFqFEGpCRpkE6JciOqL1ABaS2Guy9XFZujaHkWb8X6ESWVZ51xlbigKaxU3MxPnwekjSMP9pwqFkP4jw4j5zHiM39JezVRzDq8RR0zjmzHa0ym6peyBc9j1Nd4NIA_4WnPwgp5XCiLUq0dMBqZRrosUCupn-_Rwq2mJ59ZdcHZy_XjUHiDpnkMoH9ifMzFB3VJmw==",
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "model"
+                  }
+                },
+                {
+                  "author": "root_agent",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": null,
+                        "function_response": {
+                          "will_continue": null,
+                          "scheduling": null,
+                          "parts": null,
+                          "id": "adk-1e29fe3f-c072-48c5-9f60-8b9dac4ebcab",
+                          "name": "search_agent",
+                          "response": {
+                            "result": "The current weather in San Francisco, California is cloudy with a temperature of 54°F (12°C), feeling like 52°F (11°C). The humidity is around 90%, and there's a 10% chance of rain. The local time is 7:11 AM.\n\nFor today, Thursday, May 7, 2026, the forecast predicts a sunny day with partly cloudy skies at night. Temperatures are expected to range between 54°F (12°C) and 62°F (17°C), with humidity around 81%. There is a 10% chance of rain throughout the day and night. Other sources indicate a high of 62°F with a 0% chance of rain, or a high of 67°F, cloudy with no chance of rain."
+                          }
+                        },
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": null,
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "user"
+                  }
+                }
+              ]
+            },
+            "creation_timestamp": 1778163083.2447948,
+            "rubrics": null,
+            "app_details": {
+              "agent_details": {
+                "root_agent": {
+                  "name": "root_agent",
+                  "instructions": "\n      You are a helpful travel assistant.\n      * For general information or web searches, use the search_agent.\n      * For any questions about visiting cities, tourism, or travel recommendations, you MUST use the tourist_agent.\n    \n\nYou are an agent. Your internal name is \"root_agent\".",
+                  "tool_declarations": [
+                    {
+                      "retrieval": null,
+                      "computer_use": null,
+                      "file_search": null,
+                      "google_search": null,
+                      "google_maps": null,
+                      "code_execution": null,
+                      "enterprise_web_search": null,
+                      "function_declarations": [
+                        {
+                          "description": "",
+                          "name": "search_agent",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "request": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": null,
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": null,
+                                "property_ordering": null,
+                                "required": null,
+                                "title": null,
+                                "type": "STRING"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "request"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "STRING"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        },
+                        {
+                          "description": "",
+                          "name": "tourist_agent",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "request": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": null,
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": null,
+                                "property_ordering": null,
+                                "required": null,
+                                "title": null,
+                                "type": "STRING"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "request"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "STRING"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        }
+                      ],
+                      "google_search_retrieval": null,
+                      "parallel_ai_search": null,
+                      "url_context": null,
+                      "mcp_servers": null
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "expected_invocation": {
+            "invocation_id": "",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "What's the weather like in San Francisco?",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": null,
+            "intermediate_data": null,
+            "creation_timestamp": 0.0,
+            "rubrics": null,
+            "app_details": null
+          },
+          "eval_metric_results": [
+            {
+              "metric_name": "rubric_based_final_response_quality_v1",
+              "threshold": 0.8,
+              "criterion": {
+                "threshold": 0.8,
+                "judgeModelOptions": {
+                  "judgeModel": "gemini-flash-latest",
+                  "numSamples": 1
+                },
+                "rubrics": [
+                  {
+                    "rubricId": "relevance",
+                    "rubricContent": {
+                      "textProperty": "The response directly addresses the user's query."
+                    }
+                  },
+                  {
+                    "rubricId": "helpfulness",
+                    "rubricContent": {
+                      "textProperty": "The response is helpful and provides useful information."
+                    }
+                  }
+                ]
+              },
+              "custom_function_path": null,
+              "score": 1.0,
+              "eval_status": 1,
+              "details": {
+                "rubric_scores": [
+                  {
+                    "rubric_id": "relevance",
+                    "rationale": "The final answer explicitly describes the current weather and forecast for San Francisco, directly addressing the user's request.",
+                    "score": 1.0
+                  },
+                  {
+                    "rubric_id": "helpfulness",
+                    "rationale": "The information provided (current weather and forecast) is useful and relevant to the user's query about the weather in San Francisco.",
+                    "score": 1.0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "session_id": "___eval___session___5d248010-c5e3-4af0-a51d-ad6030b2cfc8",
+      "session_details": {
+        "id": "___eval___session___5d248010-c5e3-4af0-a51d-ad6030b2cfc8",
+        "app_name": "app",
+        "user_id": "eval_user",
+        "state": {
+          "__llm_request_key__": "7701c246-cb87-4f21-b20e-1a83914c7137"
+        },
+        "events": [
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "What's the weather like in San Francisco?",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-65e8da69-756b-4390-88ab-e3e20fa28472",
+            "author": "user",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {},
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "8eca0023-2525-407a-9699-90e6355b05be",
+            "timestamp": 1778163078.2439597
+          },
+          {
+            "model_version": "gemini-2.5-flash",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": {
+                    "id": "adk-1e29fe3f-c072-48c5-9f60-8b9dac4ebcab",
+                    "args": {
+                      "request": "weather in San Francisco"
+                    },
+                    "name": "search_agent",
+                    "partial_args": null,
+                    "will_continue": null
+                  },
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": "CtECAY89a1-fUEanIoRnQCBkBkHpxqtkJNqBlAqn-7mQdIGIPDA-fRRgj57m7KFQAo2hNTk5QaK7oadTMgSU2k9wCZggN_Z_Ib8-pjoi10vAwonVLlG9Dcn0qwjbsiGom5256WbAba-1m_Ql9x0bJuzcf1k0TI1oBOpwtTXRpZVZuxL1xTzF4q9INYyFZMcG8SHzFnYZfznKD37weH-0lW8U7HFVt7KlQ6SksFu6l2zCUNoXTUlHBjBozj2doWXs1IqFqFEGpCRpkE6JciOqL1ABaS2Guy9XFZujaHkWb8X6ESWVZ51xlbigKaxU3MxPnwekjSMP9pwqFkP4jw4j5zHiM39JezVRzDq8RR0zjmzHa0ym6peyBc9j1Nd4NIA_4WnPwgp5XCiLUq0dMBqZRrosUCupn-_Rwq2mJ59ZdcHZy_XjUHiDpnkMoH9ifMzFB3VJmw==",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "4e84cc5e-9222-41e3-ad0c-f403e5eb925b"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 8,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 8
+                }
+              ],
+              "prompt_token_count": 93,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 93
+                }
+              ],
+              "thoughts_token_count": 58,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 159,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": -2.800506830215454,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-65e8da69-756b-4390-88ab-e3e20fa28472",
+            "author": "root_agent",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "4e84cc5e-9222-41e3-ad0c-f403e5eb925b"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": [],
+            "branch": null,
+            "id": "d3d94ef1-4718-45a9-9b58-02f306573ec4",
+            "timestamp": 1778163078.247946
+          },
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": {
+                    "will_continue": null,
+                    "scheduling": null,
+                    "parts": null,
+                    "id": "adk-1e29fe3f-c072-48c5-9f60-8b9dac4ebcab",
+                    "name": "search_agent",
+                    "response": {
+                      "result": "The current weather in San Francisco, California is cloudy with a temperature of 54°F (12°C), feeling like 52°F (11°C). The humidity is around 90%, and there's a 10% chance of rain. The local time is 7:11 AM.\n\nFor today, Thursday, May 7, 2026, the forecast predicts a sunny day with partly cloudy skies at night. Temperatures are expected to range between 54°F (12°C) and 62°F (17°C), with humidity around 81%. There is a 10% chance of rain throughout the day and night. Other sources indicate a high of 62°F with a 0% chance of rain, or a high of 67°F, cloudy with no chance of rain."
+                    }
+                  },
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-65e8da69-756b-4390-88ab-e3e20fa28472",
+            "author": "root_agent",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "3c8dff6e-b67f-414b-9549-530c4956f0d5"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "d00cd964-e729-4d22-9ba2-b5ec9bff58b0",
+            "timestamp": 1778163089.8835769
+          },
+          {
+            "model_version": "gemini-2.5-flash",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "The current weather in San Francisco, California is cloudy with a temperature of 54°F (12°C), feeling like 52°F (11°C). The humidity is around 90%, and there's a 10% chance of rain. The local time is 7:11 AM.\n\nFor today, Thursday, May 7, 2026, the forecast predicts a sunny day with partly cloudy skies at night. Temperatures are expected to range between 54°F (12°C) and 62°F (17°C), with humidity around 81%. There is a 10% chance of rain throughout the day and night.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "7701c246-cb87-4f21-b20e-1a83914c7137"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 151,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 151
+                }
+              ],
+              "prompt_token_count": 351,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 351
+                }
+              ],
+              "thoughts_token_count": null,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 502,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": -0.0008712903355920552,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-65e8da69-756b-4390-88ab-e3e20fa28472",
+            "author": "root_agent",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "7701c246-cb87-4f21-b20e-1a83914c7137"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "5afd95c9-242d-441c-9519-e2f10a8d22ae",
+            "timestamp": 1778163089.8873816
+          }
+        ],
+        "last_update_time": 1778163089.8873816
+      },
+      "user_id": "eval_user"
+    }
+  ],
+  "creation_timestamp": 1778163095.2536554
+}
