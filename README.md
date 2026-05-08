@@ -15,6 +15,9 @@ agent-cli-hackathon/
 │   ├── agent.py               # Main agent logic
 │   ├── agent_runtime_app.py    # Agent Runtime application logic
 │   └── app_utils/             # App utilities and helpers
+├── mcp/         # MCP Server (Weather Tool)
+│   ├── app/                   # MCP server application code
+│   └── deploy/                # Deployment scripts
 ├── tests/                     # Unit, integration, and load tests
 ├── GEMINI.md                  # AI-assisted development guide
 └── pyproject.toml             # Project dependencies
@@ -55,6 +58,27 @@ adk web --allow_origins "*"
 | `uv run pytest tests/unit tests/integration` | Run unit and integration tests                                                        |
 | `agents-cli deploy`  | Deploy agent to Agent Runtime                                                                |
 | `agents-cli publish gemini-enterprise` | Register deployed agent to Gemini Enterprise                    |
+
+## 🌐 Model Context Protocol (MCP) Server
+
+This project includes a Weather MCP Server that exposes a `get_weather` tool. It wraps an ADK agent that uses Google Maps and Weather APIs to provide accurate weather information for any city.
+
+### MCP Deployment
+
+The MCP server is designed to be deployed to Cloud Run using the provided script.
+
+1.  **Configure Secret**: Ensure you have a Google Maps/Weather API key stored in Google Cloud Secret Manager named `weather-api-key`.
+2.  **Deploy**:
+    ```bash
+    chmod +x mcp/deploy/deploy.sh
+    ./mcp/deploy/deploy.sh
+    ```
+
+The script will:
+- Build the container image using Cloud Build.
+- Deploy the service to Cloud Run.
+- Grant necessary permissions and set up secret environment variables.
+- Update `mcp/.env` with the deployment URL.
 
 ## 🛠️ Project Management
 
