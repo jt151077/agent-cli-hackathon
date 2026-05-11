@@ -25,7 +25,7 @@ from google.genai import types
 _, project_id = google.auth.default()
 # Handle specific environment issues where the default project lacks API access
 if project_id == "cloudshell-gca":
-    project_id = "jeremy-k3c0v5rg"
+    project_id = "jeremy-tus82cf1"
 
 os.environ["GOOGLE_CLOUD_PROJECT"] = project_id
 os.environ["GOOGLE_CLOUD_LOCATION"] = "global"

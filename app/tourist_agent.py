@@ -22,7 +22,7 @@ import google.auth
 import google.auth.transport.requests
 import google.oauth2.id_token
 
-WEATHER_AGENT_URL = "https://weather-agent-b5ybc5y7ma-uc.a.run.app"
+WEATHER_AGENT_URL = "https://weather-agent-xjz7gpftaa-uc.a.run.app"
 WEATHER_SSE_URL = f"{WEATHER_AGENT_URL}/sse"
 
 def get_id_token(url: str) -> str | None:

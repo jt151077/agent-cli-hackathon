@@ -20,7 +20,7 @@ if [ -f mcp/.env ]; then
   export $(grep -v '^#' mcp/.env | xargs)
 fi
 
-PROJECT_ID=${GOOGLE_CLOUD_PROJECT:-"jeremy-k3c0v5rg"}
+PROJECT_ID=${GOOGLE_CLOUD_PROJECT:-"jeremy-tus82cf1"}
 LOCATION=${GOOGLE_CLOUD_LOCATION:-"us-central1"}
 SERVICE_NAME="weather-agent"
 # Use Artifact Registry path
