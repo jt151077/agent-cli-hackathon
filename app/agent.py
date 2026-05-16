@@ -14,13 +14,19 @@
 # limitations under the License.
 
 import os
+import re
 import google.auth
+from typing import Optional
 from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 from google.adk.apps import App
 from google.adk.models import Gemini
 from google.adk.tools import google_search
 from google.genai import types
+from google.adk.agents.callback_context import CallbackContext
+from google.adk.models import LlmRequest, LlmResponse
+
+
 
 _, project_id = google.auth.default()
 # Handle specific environment issues where the default project lacks API access
@@ -32,6 +38,27 @@ os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 
 from .tourist_agent import tourist_agent
+
+def pii_verification_callback(
+    callback_context: CallbackContext, llm_request: LlmRequest
+) -> Optional[LlmResponse]:
+    """Verifies that the request doesn't include any PII information."""
+    # Simple regex for email and phone numbers
+    email_pattern = r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+    phone_pattern = r"\b\d{3}[-.]?\d{3}[-.]?\d{4}\b"
+
+    for content in llm_request.contents:
+        for part in content.parts:
+            if hasattr(part, 'text') and part.text:
+                text = part.text
+                if re.search(email_pattern, text) or re.search(phone_pattern, text):
+                    return LlmResponse(
+                        content={
+                            "role": "model",
+                            "parts": [{"text": "I'm sorry, but I cannot process requests containing personal information like email addresses or phone numbers for security reasons."}]
+                        }
+                    )
+    return None
 
 search_agent = Agent(
     name="search_agent",
@@ -52,6 +79,7 @@ root_agent = Agent(
       * For any questions about visiting cities, tourism, travel recommendations, or weather in a city, you MUST use the tourist_agent.
     """,
     tools=[AgentTool(search_agent), AgentTool(tourist_agent)],
+    before_model_callback=[pii_verification_callback],
 )
 
 app = App(
