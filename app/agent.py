@@ -15,18 +15,20 @@
 
 import os
 import re
-import google.auth
 from typing import Optional
+
+import google.auth
 from google.adk.agents import Agent
-from google.adk.tools.agent_tool import AgentTool
-from google.adk.apps import App
-from google.adk.models import Gemini
-from google.adk.tools import google_search
-from google.genai import types
 from google.adk.agents.callback_context import CallbackContext
-from google.adk.models import LlmRequest, LlmResponse
+from google.adk.apps import App
+from google.adk.models import Gemini, LlmRequest, LlmResponse
+from google.adk.tools import google_search
+from google.adk.tools.agent_tool import AgentTool
+from google.adk.tools.preload_memory_tool import PreloadMemoryTool
+from google.genai import types
 
-
+from .app_utils.memory import initialize_user_memory, save_to_memory_bank
+from .tourist_agent import tourist_agent
 
 _, project_id = google.auth.default()
 # Handle specific environment issues where the default project lacks API access
@@ -37,7 +39,6 @@ os.environ["GOOGLE_CLOUD_PROJECT"] = project_id
 os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 
-from .tourist_agent import tourist_agent
 
 def pii_verification_callback(
     callback_context: CallbackContext, llm_request: LlmRequest
@@ -48,17 +49,23 @@ def pii_verification_callback(
     phone_pattern = r"\b\d{3}[-.]?\d{3}[-.]?\d{4}\b"
 
     for content in llm_request.contents:
-        for part in content.parts:
-            if hasattr(part, 'text') and part.text:
-                text = part.text
-                if re.search(email_pattern, text) or re.search(phone_pattern, text):
-                    return LlmResponse(
-                        content={
-                            "role": "model",
-                            "parts": [{"text": "I'm sorry, but I cannot process requests containing personal information like email addresses or phone numbers for security reasons."}]
-                        }
-                    )
+        if content.parts:
+            for part in content.parts:
+                if hasattr(part, "text") and part.text:
+                    text = part.text
+                    if re.search(email_pattern, text) or re.search(phone_pattern, text):
+                        return LlmResponse(
+                            content={
+                                "role": "model",
+                                "parts": [
+                                    {
+                                        "text": "I'm sorry, but I cannot process requests containing personal information like email addresses or phone numbers for security reasons."
+                                    }
+                                ],
+                            }
+                        )
     return None
+
 
 search_agent = Agent(
     name="search_agent",
@@ -75,10 +82,17 @@ root_agent = Agent(
     ),
     instruction="""
       You are a helpful travel assistant.
+      
+      User Travel History: {user:visited_cities}
+      
+      CRITICAL RULES:
+      * If the user's travel history is NOT empty, you MUST warmly remind them of the cities they've visited in your first response.
       * For general information or web searches, use the search_agent.
       * For any questions about visiting cities, tourism, travel recommendations, or weather in a city, you MUST use the tourist_agent.
     """,
-    tools=[AgentTool(search_agent), AgentTool(tourist_agent)],
+    tools=[AgentTool(search_agent), AgentTool(tourist_agent), PreloadMemoryTool()],
+    before_agent_callback=[initialize_user_memory],
+    after_agent_callback=[save_to_memory_bank],
     before_model_callback=[pii_verification_callback],
 )
 

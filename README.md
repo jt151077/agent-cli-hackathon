@@ -47,6 +47,23 @@ Test the agent with a local web server:
 adk web --allow_origins "*"
 ```
 
+## Memory & Persistence
+
+This agent implements a hybrid memory strategy to provide a personalized, "memory-aware" experience across sessions.
+
+### 1. User-Persistent State (Session Service)
+Used for structured, deterministic data that must be strictly maintained.
+- **Implementation**: Captures city names via `before_tool_callback` and stores them in `user:visited_cities`.
+- **Storage**: Agent Engine persists keys with the `user:` prefix across all sessions for the same `user_id`.
+- **Retrieval**: Uses **Dynamic State Injection** (`{user:visited_cities}`) in the system instruction. This is high-reliability and low-latency.
+
+### 2. Memory Bank (Long-term Knowledge)
+Used for semantic facts, insights, and observability in the Agent Registry.
+- **Implementation**: Uses `after_agent_callback` to trigger `callback_context.add_session_to_memory()`.
+- **Storage**: Generates natural language **Memory objects** (embeddings) stored in the managed Memory Bank.
+- **Retrieval**: Uses the `PreloadMemoryTool` to automatically find and inject relevant past facts into the conversation context.
+
+---
 
 ## Commands
 
@@ -107,5 +124,3 @@ To set up your production infrastructure, run `agents-cli infra cicd`.
 ## Observability
 
 Built-in telemetry exports to Cloud Trace, BigQuery, and Cloud Logging.
-
-
