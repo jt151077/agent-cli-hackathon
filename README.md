@@ -1,126 +1,94 @@
-# agent-cli-hackathon
+# Travel Assistant Agent (ADK Silverfin)
 
-Simple ReAct agent
-Agent generated with `agents-cli` version `0.1.2`
+This project implements a sophisticated travel assistant using the Google Agent Development Kit (ADK) and Gemini 2.5 Flash. It features a multi-agent architecture with specialized agents for tourism and search, integrated user memory, and safety filters.
 
 ## Architecture
 
-![Architecture Diagram](imgs/img2.png)
+The system uses a **Root Agent** that orchestrates delegation to specialized agents:
 
-## Project Structure
+- **Root Agent**: The main entry point. It manages user memory (visited cities) and decides which sub-agent to invoke.
+- **Tourist Agent**: Specialized in visiting cities, tourism, travel recommendations, and weather.
+- **Search Agent**: Specialized in general information retrieval using Google Search.
 
-```
-agent-cli-hackathon/
-├── app/         # Core agent code
-│   ├── agent.py               # Main agent logic
-│   ├── agent_runtime_app.py    # Agent Runtime application logic
-│   └── app_utils/             # App utilities and helpers
-├── mcp/         # MCP Server (Weather Tool)
-│   ├── app/                   # MCP server application code
-│   └── deploy/                # Deployment scripts
-├── tests/                     # Unit, integration, and load tests
-├── GEMINI.md                  # AI-assisted development guide
-└── pyproject.toml             # Project dependencies
-```
+### Key Features
 
-> 💡 **Tip:** Use [Gemini CLI](https://github.com/google-gemini/gemini-cli) for AI-assisted development - project context is pre-configured in `GEMINI.md`.
+- **User Memory**: Persists user travel history (e.g., visited cities) across sessions using ADK memory callbacks.
+- **PII Verification**: A safety callback that detects and blocks personal information (emails, phone numbers, SSNs) before it reaches the model.
+- **Multi-Agent Delegation**: Uses `AgentTool` to seamlessly hand off tasks between specialized agents.
 
-## Requirements
+## Getting Started
 
-Before you begin, ensure you have:
-- **uv**: Python package manager (used for all dependency management in this project) - [Install](https://docs.astral.sh/uv/getting-started/installation/) ([add packages](https://docs.astral.sh/uv/concepts/dependencies/) with `uv add <package>`)
-- **agents-cli**: Agents CLI - Install with `uv tool install google-agents-cli`
-- **Google Cloud SDK**: For GCP services - [Install](https://cloud.google.com/sdk/docs/install)
+### Prerequisites
 
+- [uv](https://github.com/astral-sh/uv) installed.
+- [google-agents-cli](https://pypi.org/project/google-agents-cli/) installed.
+- Google Cloud project with Vertex AI API enabled.
 
-## Quick Start
-
-Install required packages:
+### Installation
 
 ```bash
+# Install dependencies
 agents-cli install
 ```
 
-Test the agent with a local web server:
+### Running Locally
 
 ```bash
-adk web --allow_origins "*"
+# Launch the interactive playground
+agents-cli playground
 ```
 
-## Memory & Persistence
+## Testing and Evaluation
 
-This agent implements a hybrid memory strategy to provide a personalized, "memory-aware" experience across sessions.
+The project includes a robust testing and evaluation framework to ensure agent reliability and safety.
 
-### 1. User-Persistent State (Session Service)
-Used for structured, deterministic data that must be strictly maintained.
-- **Implementation**: Captures city names via `before_tool_callback` and stores them in `user:visited_cities`.
-- **Storage**: Agent Engine persists keys with the `user:` prefix across all sessions for the same `user_id`.
-- **Retrieval**: Uses **Dynamic State Injection** (`{user:visited_cities}`) in the system instruction. This is high-reliability and low-latency.
+### Unit & Integration Tests
 
-### 2. Memory Bank (Long-term Knowledge)
-Used for semantic facts, insights, and observability in the Agent Registry.
-- **Implementation**: Uses `after_agent_callback` to trigger `callback_context.add_session_to_memory()`.
-- **Storage**: Generates natural language **Memory objects** (embeddings) stored in the managed Memory Bank.
-- **Retrieval**: Uses the `PreloadMemoryTool` to automatically find and inject relevant past facts into the conversation context.
+We use `pytest` for automated testing of core components.
 
----
+- **Unit Tests** (`tests/unit/`):
+    - `test_pii_callback.py`: Verifies that PII is correctly detected and blocked.
+    - `test_memory_callbacks.py`: Ensures user memory is correctly initialized and saved.
+- **Integration Tests** (`tests/integration/`):
+    - `test_delegation.py`: Verifies that the Root Agent correctly delegates queries to the Tourist or Search agents.
+    - `test_agent_runtime_app.py`: Tests the full application flow.
 
-## Commands
+**Run tests:**
+```bash
+uv run pytest tests/unit tests/integration
+```
 
-| Command              | Description                                                                                 |
-| -------------------- | ------------------------------------------------------------------------------------------- |
-| `agents-cli install` | Install dependencies using uv                                                         |
-| `agents-cli playground` | Launch local development environment                                                  |
-| `agents-cli lint`    | Run code quality checks                                                               |
-| `uv run pytest tests/unit tests/integration` | Run unit and integration tests                                                        |
-| `agents-cli deploy`  | Deploy agent to Agent Runtime                                                                |
-| `agents-cli publish gemini-enterprise` | Register deployed agent to Gemini Enterprise                    |
+### Evaluation (Latest Improvements)
 
-## 🌐 Model Context Protocol (MCP) Server
+We use `agents-cli eval` to perform data-driven evaluations of agent behavior. Evaluation sets are located in `tests/eval/evalsets/`.
 
-This project includes a Weather MCP Server that exposes a `get_weather` tool. It wraps an ADK agent that uses Google Maps and Weather APIs to provide accurate weather information for any city.
+**Run default evaluations:**
+```bash
+agents-cli eval run
+```
 
-### MCP Deployment
+**Run specific evaluation set:**
+```bash
+agents-cli eval run --evalset tests/eval/evalsets/travel.evalset.json
+```
 
-The MCP server is designed to be deployed to Cloud Run using the provided script.
+#### Evaluation Metrics
 
-1.  **Configure Secret**: Ensure you have a Google Maps/Weather API key stored in Google Cloud Secret Manager named `weather-api-key`.
-2.  **Deploy**:
-    ```bash
-    chmod +x mcp/deploy/deploy.sh
-    ./mcp/deploy/deploy.sh
-    ```
+- **Tool Trajectory Score**: Measures if the agent calls the correct tools in the expected sequence.
+- **Response Match Score**: Evaluates the quality and accuracy of the agent's final response against expected output.
 
-The script will:
-- Build the container image using Cloud Build.
-- Deploy the service to Cloud Run.
-- Grant necessary permissions and set up secret environment variables.
-- Update `mcp/.env` with the deployment URL.
+#### Evaluation Sets
 
-## 🛠️ Project Management
-
-| Command | What It Does |
-|---------|--------------|
-| `agents-cli scaffold enhance` | Add CI/CD pipelines and Terraform infrastructure |
-| `agents-cli infra cicd` | One-command setup of entire CI/CD pipeline + infrastructure |
-| `agents-cli scaffold upgrade` | Auto-upgrade to latest version while preserving customizations |
-
----
-
-## Development
-
-Edit your agent logic in `app/agent.py` and test with `agents-cli playground` - it auto-reloads on save.
+- `basic.evalset.json`: Core capability tests.
+- `travel.evalset.json`: Scenarios specific to travel recommendations and city information.
 
 ## Deployment
 
+The agent is designed to be deployed to **Agent Runtime** on Google Cloud.
+
 ```bash
-gcloud config set project <your-project-id>
+# Deploy to dev environment (requires approval)
 agents-cli deploy
 ```
 
-To add CI/CD and Terraform, run `agents-cli scaffold enhance`.
-To set up your production infrastructure, run `agents-cli infra cicd`.
-
-## Observability
-
-Built-in telemetry exports to Cloud Trace, BigQuery, and Cloud Logging.
+For full CI/CD pipelines, use `agents-cli infra cicd`.
