@@ -14,6 +14,10 @@
         {
           "rubricId": "helpfulness",
           "rubricContent": { "textProperty": "The response is helpful and provides useful information." }
+        },
+        {
+          "rubricId": "warm_remind_cities",
+          "rubricContent": { "textProperty": "If the user has visited cities in their history, the response MUST warmly remind them of those cities." }
         }
       ]
     }

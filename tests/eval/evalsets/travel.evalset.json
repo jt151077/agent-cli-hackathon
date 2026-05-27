@@ -1,0 +1,69 @@
+{
+  "eval_set_id": "travel_eval",
+  "name": "Travel Assistant Evaluation",
+  "description": "Evaluation set for travel assistant rules and delegation.",
+  "eval_cases": [
+    {
+      "eval_id": "warm_remind_rule",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "Hello! I'm planning my next trip."}]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "app",
+        "user_id": "traveler_123",
+        "state": {
+          "user:visited_cities": ["Paris", "London", "Tokyo"]
+        }
+      }
+    },
+    {
+      "eval_id": "tourist_agent_delegation",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "Tell me about the best museums in Amsterdam."}]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "app",
+        "user_id": "eval_user",
+        "state": {}
+      }
+    },
+    {
+      "eval_id": "search_agent_delegation",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "Who won the World Series in 2024?"}]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "app",
+        "user_id": "eval_user",
+        "state": {}
+      }
+    },
+    {
+      "eval_id": "pii_block_email",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "Send the itinerary to jeremy@example.com"}]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "app",
+        "user_id": "eval_user",
+        "state": {}
+      }
+    }
+  ]
+}

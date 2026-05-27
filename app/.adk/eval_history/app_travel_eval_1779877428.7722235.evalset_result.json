@@ -1,0 +1,585 @@
+{
+  "eval_set_result_id": "app_travel_eval_1779877428.7722235",
+  "eval_set_result_name": "app_travel_eval_1779877428.7722235",
+  "eval_set_id": "travel_eval",
+  "eval_case_results": [
+    {
+      "eval_set_file": "travel_eval",
+      "eval_set_id": "travel_eval",
+      "eval_id": "warm_remind_rule",
+      "final_eval_status": 1,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [
+        {
+          "metric_name": "rubric_based_final_response_quality_v1",
+          "threshold": 0.8,
+          "criterion": {
+            "threshold": 0.8,
+            "judgeModelOptions": {
+              "judgeModel": "gemini-flash-latest",
+              "numSamples": 1
+            },
+            "rubrics": [
+              {
+                "rubricId": "relevance",
+                "rubricContent": {
+                  "textProperty": "The response directly addresses the user's query."
+                }
+              },
+              {
+                "rubricId": "helpfulness",
+                "rubricContent": {
+                  "textProperty": "The response is helpful and provides useful information."
+                }
+              },
+              {
+                "rubricId": "warm_remind_cities",
+                "rubricContent": {
+                  "textProperty": "If the user has visited cities in their history, the response MUST warmly remind them of those cities."
+                }
+              }
+            ]
+          },
+          "custom_function_path": null,
+          "score": 1.0,
+          "eval_status": 1,
+          "details": {
+            "rubric_scores": [
+              {
+                "rubric_id": "relevance",
+                "rationale": "This is an aggregated score derived from individual entries. Please refer to individual entries in each invocation for actual rationale from the model.",
+                "score": 1.0
+              },
+              {
+                "rubric_id": "helpfulness",
+                "rationale": "This is an aggregated score derived from individual entries. Please refer to individual entries in each invocation for actual rationale from the model.",
+                "score": 1.0
+              },
+              {
+                "rubric_id": "warm_remind_cities",
+                "rationale": "This is an aggregated score derived from individual entries. Please refer to individual entries in each invocation for actual rationale from the model.",
+                "score": 1.0
+              }
+            ]
+          }
+        }
+      ],
+      "eval_metric_result_per_invocation": [
+        {
+          "actual_invocation": {
+            "invocation_id": "e-adcf0dbc-df86-4750-8b19-fc5befa15e12",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Hello! I'm planning my next trip.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Hello there! I see you're planning your next trip. You've previously visited Paris, London, and Tokyo. Where are you thinking of going this time?",
+                  "thought": null,
+                  "thought_signature": "CroCAY89a194C-HcHCkXPZ3sMU1xqKyGWrqoKVA--iuy4vZVaf2H3JcaOk2fS-bwUqiawFdt7hsVedgTPKgpS7IOJBk3T819xCYwtxhi53-K12Z95kom6pcj-lHf7uF_DV8zaVCYlR6K5b3cYQxoyM2GOnce8zsb7Y4fHlBR9nl9kErq1k0SNml6D_NHlcPagfyX1nOZ9bp9odyGs-nzYRW5RUtVE9wRIpNs1Ouk-ABd53dcInq02sFWMXuU65o2cPFa63hcH295n3K_lMN3OXwZQcaVDNcA5VB0TtU8G-H2NBlCqLg8PiBVGZojj6u1iPkeIWjg8pztnK6nnSRRsc0TVek5uWGk07rIs7XjHTbQNTfegPsx736uMexI1JcEMcYtAk5qI4tLxobO6kdhVFmdvndg37o_yCXWHt4=",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "intermediate_data": {
+              "invocation_events": []
+            },
+            "creation_timestamp": 1779877413.4657469,
+            "rubrics": null,
+            "app_details": {
+              "agent_details": {
+                "root_agent": {
+                  "name": "root_agent",
+                  "instructions": "\n      You are a helpful travel assistant.\n      \n      User Travel History: ['Paris', 'London', 'Tokyo']\n      \n      CRITICAL RULES:\n      * If the user's travel history is NOT empty, you MUST warmly remind them of the cities they've visited in your first response.\n      * For general information or web searches, use the search_agent.\n      * For any questions about visiting cities, tourism, travel recommendations, or weather in a city, you MUST use the tourist_agent.\n    \n\nYou are an agent. Your internal name is \"root_agent\".",
+                  "tool_declarations": [
+                    {
+                      "retrieval": null,
+                      "computer_use": null,
+                      "file_search": null,
+                      "google_search": null,
+                      "google_maps": null,
+                      "code_execution": null,
+                      "enterprise_web_search": null,
+                      "function_declarations": [
+                        {
+                          "description": "",
+                          "name": "search_agent",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "request": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": null,
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": null,
+                                "property_ordering": null,
+                                "required": null,
+                                "title": null,
+                                "type": "STRING"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "request"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "STRING"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        },
+                        {
+                          "description": "",
+                          "name": "tourist_agent",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "request": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": null,
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": null,
+                                "property_ordering": null,
+                                "required": null,
+                                "title": null,
+                                "type": "STRING"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "request"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "STRING"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        }
+                      ],
+                      "google_search_retrieval": null,
+                      "parallel_ai_search": null,
+                      "url_context": null,
+                      "mcp_servers": null
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "expected_invocation": {
+            "invocation_id": "",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Hello! I'm planning my next trip.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": null,
+            "intermediate_data": null,
+            "creation_timestamp": 0.0,
+            "rubrics": null,
+            "app_details": null
+          },
+          "eval_metric_results": [
+            {
+              "metric_name": "rubric_based_final_response_quality_v1",
+              "threshold": 0.8,
+              "criterion": {
+                "threshold": 0.8,
+                "judgeModelOptions": {
+                  "judgeModel": "gemini-flash-latest",
+                  "numSamples": 1
+                },
+                "rubrics": [
+                  {
+                    "rubricId": "relevance",
+                    "rubricContent": {
+                      "textProperty": "The response directly addresses the user's query."
+                    }
+                  },
+                  {
+                    "rubricId": "helpfulness",
+                    "rubricContent": {
+                      "textProperty": "The response is helpful and provides useful information."
+                    }
+                  },
+                  {
+                    "rubricId": "warm_remind_cities",
+                    "rubricContent": {
+                      "textProperty": "If the user has visited cities in their history, the response MUST warmly remind them of those cities."
+                    }
+                  }
+                ]
+              },
+              "custom_function_path": null,
+              "score": 1.0,
+              "eval_status": 1,
+              "details": {
+                "rubric_scores": [
+                  {
+                    "rubric_id": "relevance",
+                    "rationale": "The response acknowledges the user's greeting and their stated intent (planning a trip), and then asks a relevant follow-up question, directly addressing the conversational opening.",
+                    "score": 1.0
+                  },
+                  {
+                    "rubric_id": "helpfulness",
+                    "rationale": "By referencing past trips, the agent provides relevant context, and by soliciting the next destination, it facilitates the start of the trip planning process, making the response helpful.",
+                    "score": 1.0
+                  },
+                  {
+                    "rubric_id": "warm_remind_cities",
+                    "rationale": "The agent reminds the user of their past visits (Paris, London, and Tokyo). The language used (e.g., \"Hello there! I see you're planning your next trip.\") is conversational and warm, satisfying the condition that the reminder be \"warmly\" delivered.",
+                    "score": 1.0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "session_id": "___eval___session___c0dab30f-f706-47cb-be55-96ec371f22dc",
+      "session_details": {
+        "id": "___eval___session___c0dab30f-f706-47cb-be55-96ec371f22dc",
+        "app_name": "app",
+        "user_id": "traveler_123",
+        "state": {
+          "__llm_request_key__": "337124a4-afe1-43e1-aa5c-b0be29a3ef01",
+          "user:visited_cities": [
+            "Paris",
+            "London",
+            "Tokyo"
+          ]
+        },
+        "events": [
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Hello! I'm planning my next trip.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-adcf0dbc-df86-4750-8b19-fc5befa15e12",
+            "author": "user",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {},
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "2781550b-eba0-47b4-b2e0-eabfba2acbde",
+            "timestamp": 1779877411.9705093
+          },
+          {
+            "model_version": "gemini-2.5-flash",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Hello there! I see you're planning your next trip. You've previously visited Paris, London, and Tokyo. Where are you thinking of going this time?",
+                  "thought": null,
+                  "thought_signature": "CroCAY89a194C-HcHCkXPZ3sMU1xqKyGWrqoKVA--iuy4vZVaf2H3JcaOk2fS-bwUqiawFdt7hsVedgTPKgpS7IOJBk3T819xCYwtxhi53-K12Z95kom6pcj-lHf7uF_DV8zaVCYlR6K5b3cYQxoyM2GOnce8zsb7Y4fHlBR9nl9kErq1k0SNml6D_NHlcPagfyX1nOZ9bp9odyGs-nzYRW5RUtVE9wRIpNs1Ouk-ABd53dcInq02sFWMXuU65o2cPFa63hcH295n3K_lMN3OXwZQcaVDNcA5VB0TtU8G-H2NBlCqLg8PiBVGZojj6u1iPkeIWjg8pztnK6nnSRRsc0TVek5uWGk07rIs7XjHTbQNTfegPsx736uMexI1JcEMcYtAk5qI4tLxobO6kdhVFmdvndg37o_yCXWHt4=",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "337124a4-afe1-43e1-aa5c-b0be29a3ef01"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 34,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 34
+                }
+              ],
+              "prompt_token_count": 154,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 154
+                }
+              ],
+              "thoughts_token_count": 59,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 247,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": -0.5564797345329734,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-adcf0dbc-df86-4750-8b19-fc5befa15e12",
+            "author": "root_agent",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "337124a4-afe1-43e1-aa5c-b0be29a3ef01"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "cdad4368-3c4b-417b-8373-9722899407bd",
+            "timestamp": 1779877411.9762733
+          }
+        ],
+        "last_update_time": 1779877411.9762733
+      },
+      "user_id": "traveler_123"
+    }
+  ],
+  "creation_timestamp": 1779877428.7722235
+}
