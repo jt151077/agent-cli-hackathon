@@ -15,9 +15,11 @@ agent-cli-hackathon/
 │   ├── agent.py               # Main agent logic
 │   ├── agent_runtime_app.py    # Agent Runtime application logic
 │   └── app_utils/             # App utilities and helpers
-├── mcp/         # MCP Server (Weather Tool)
+├── mcp/         # Model Context Protocol (Weather Tool)
 │   ├── app/                   # MCP server application code
 │   └── deploy/                # Deployment scripts
+├── skills/      # Dynamic agent skills (Persona & Tone)
+│   └── tourist_concierge/     # Example skill definition
 ├── tests/                     # Unit, integration, and load tests
 ├── GEMINI.md                  # AI-assisted development guide
 └── pyproject.toml             # Project dependencies
@@ -62,6 +64,19 @@ Used for semantic facts, insights, and observability in the Agent Registry.
 - **Implementation**: Uses `after_agent_callback` to trigger `callback_context.add_session_to_memory()`.
 - **Storage**: Generates natural language **Memory objects** (embeddings) stored in the managed Memory Bank.
 - **Retrieval**: Uses the `PreloadMemoryTool` to automatically find and inject relevant past facts into the conversation context.
+
+## Skills Management
+
+The agent uses a dynamic skill-based architecture to manage persona, tone, and domain-specific knowledge.
+
+### Dynamic Skill Loading
+Skills are decoupled from the core agent logic and loaded dynamically from the `skills/` directory.
+- **Implementation**: `SkillManager` scans the directory for `SKILL.md` files and indexes them.
+- **Toolset**: `SkillToolset` provides these skills as tools to the agents, allowing them to adapt their behavior based on the triggered skill.
+- **Benefits**: This allows for easy extension of agent capabilities and consistent persona enforcement without modifying the main agent code.
+
+### Core Skills
+- **Tourist Concierge**: Located in `skills/tourist_concierge/`, this skill provides sophisticated travel recommendations and ensures a professional concierge tone throughout the interaction.
 
 ---
 
