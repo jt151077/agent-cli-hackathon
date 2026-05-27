@@ -22,12 +22,13 @@ from google.adk.agents import Agent
 from google.adk.agents.callback_context import CallbackContext
 from google.adk.apps import App
 from google.adk.models import Gemini, LlmRequest, LlmResponse
-from google.adk.tools import google_search
 from google.adk.tools.agent_tool import AgentTool
+from google.adk.tools.google_search_tool import GoogleSearchTool
 from google.adk.tools.preload_memory_tool import PreloadMemoryTool
 from google.genai import types
 
 from .app_utils.memory import initialize_user_memory, save_to_memory_bank
+from .app_utils.skills import get_ai_skills
 from .tourist_agent import tourist_agent
 
 _, project_id = google.auth.default()
@@ -63,7 +64,11 @@ def pii_verification_callback(
                                     "role": "model",
                                     "parts": [
                                         {
-                                            "text": f"I'm sorry, but I cannot process requests containing personal information ({pii_type}) for security reasons."
+                                            "text": (
+                                                "Good day. I hope this message finds you well. "
+                                                f"I must politely inform you that I am unable to process requests containing personal information ({pii_type}) for security and privacy reasons. "
+                                                "Please let me know if there is anything else I can assist you with to ensure your travel planning remains a pleasure."
+                                            )
                                         }
                                     ],
                                 }
@@ -71,11 +76,19 @@ def pii_verification_callback(
     return None
 
 
+# Initialize dynamic skills
+ai_skills = get_ai_skills()
+
 search_agent = Agent(
     name="search_agent",
     model=Gemini(model="gemini-2.5-flash"),
-    instruction="You are a specialist in Google Search. Use the search tool to find information.",
-    tools=[google_search],
+    instruction="""
+      You are a distinguished research assistant for a high-end concierge. 
+      Your goal is to provide precise and professional information.
+      Always maintain a polite and formal tone.
+      Use the search tool to find accurate answers.
+    """,
+    tools=[GoogleSearchTool()],
 )
 
 root_agent = Agent(
@@ -85,16 +98,24 @@ root_agent = Agent(
         retry_options=types.HttpRetryOptions(attempts=3),
     ),
     instruction="""
-      You are a helpful travel assistant.
+      You are a distinguished travel coordinator and head concierge. Your goal is to provide a seamless and professional experience.
       
       User Travel History: {user:visited_cities}
       
       CRITICAL RULES:
-      * If the user's travel history is NOT empty, you MUST warmly remind them of the cities they've visited in your first response.
+      * At the start of a new conversation, you MUST begin with a warm, professional greeting (e.g., \"Good day,\" \"It is a pleasure to assist you\"). For subsequent interactions in the same conversation, use a polite but concise acknowledgment instead of a full formal greeting.
+      * If the user's travel history is NOT empty, you MUST elegantly remind them of the cities they've visited in your response.
       * For general information or web searches, use the search_agent.
       * For any questions about visiting cities, tourism, travel recommendations, or weather in a city, you MUST use the tourist_agent.
+      * When relaying information from a sub-agent, ALWAYS ensure the final output is a cohesive, professional concierge response that includes an appropriate greeting (consistent with the conversation state) and a professional closing.
+      * Always conclude with a professional and helpful closing, offering further assistance (e.g., \"Should you require any further recommendations, I remain at your service\").
     """,
-    tools=[AgentTool(search_agent), AgentTool(tourist_agent), PreloadMemoryTool()],
+    tools=[
+        AgentTool(search_agent), 
+        AgentTool(tourist_agent), 
+        PreloadMemoryTool(),
+        ai_skills
+    ],
     before_agent_callback=[initialize_user_memory],
     after_agent_callback=[save_to_memory_bank],
     before_model_callback=[pii_verification_callback],

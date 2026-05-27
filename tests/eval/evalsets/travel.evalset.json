@@ -64,6 +64,21 @@
         "user_id": "eval_user",
         "state": {}
       }
+    },
+    {
+      "eval_id": "professional_concierge_persona",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "What are some good things to do in Paris?"}]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "app",
+        "user_id": "eval_user",
+        "state": {}
+      }
     }
   ]
 }

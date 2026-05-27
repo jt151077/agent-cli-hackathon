@@ -201,3 +201,5 @@ tools/a2a-inspector/
 
 deployment_metadata.json
 enable_apis.sh
+
+**/.adk/

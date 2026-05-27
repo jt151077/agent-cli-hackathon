@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+import os
 import google.auth
 import google.auth.transport.requests
 import google.oauth2.id_token
@@ -23,6 +24,7 @@ from google.adk.tools.mcp_tool import McpToolset, SseConnectionParams
 from google.genai import types
 
 from .app_utils.memory import track_city_visit_callback
+from .app_utils.skills import get_ai_skills
 
 WEATHER_AGENT_URL = "https://weather-agent-hef23kydta-uc.a.run.app"
 WEATHER_SSE_URL = f"{WEATHER_AGENT_URL}/sse"
@@ -53,6 +55,9 @@ weather_toolset = McpToolset(
     header_provider=get_auth_headers,
 )
 
+# Initialize dynamic skills
+ai_skills = get_ai_skills()
+
 tourist_agent = Agent(
     name="tourist_agent",
     model=Gemini(
@@ -61,10 +66,13 @@ tourist_agent = Agent(
     ),
     before_tool_callback=[track_city_visit_callback],
     instruction="""
-      You are a tourist information expert. Provide interesting facts and places to visit for the given city.
+      You are a tourist information expert. 
+      You MUST provide interesting facts and places to visit for the given city.
       You MUST also provide the current weather for the city by calling the get_weather tool from your available tools.
-      Include the weather information exactly as returned by the tool in your response.
-      Keep the overall answer concise.
+      Include the weather information exactly as returned by the tool in your response, but woven elegantly into your concierge-style reply.
+      Keep the overall answer concise but sophisticated.
+      
+      Note: You have access to specialized concierge skills. Use them to maintain a professional tone and provide high-quality recommendations.
     """,
-    tools=[weather_toolset],
+    tools=[weather_toolset, ai_skills],
 )

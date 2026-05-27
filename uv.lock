@@ -20,7 +20,7 @@ wheels = [
 ]
 
 [[package]]
-name = "agent-cli-hackathon-step5"
+name = "agent-cli-hackathon-step6"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

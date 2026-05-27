@@ -18,6 +18,10 @@
         {
           "rubricId": "warm_remind_cities",
           "rubricContent": { "textProperty": "If the user has visited cities in their history, the response MUST warmly remind them of those cities." }
+        },
+        {
+          "rubricId": "professional_concierge_persona",
+          "rubricContent": { "textProperty": "The response MUST use a professional, distinguished, and welcoming tone typical of a high-end concierge or tour operator. It should include a warm greeting and a professional closing offering further assistance." }
         }
       ]
     }
