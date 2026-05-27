@@ -24,7 +24,7 @@ from google.genai import types
 
 from .app_utils.memory import track_city_visit_callback
 
-WEATHER_AGENT_URL = "https://weather-agent-xjz7gpftaa-uc.a.run.app"
+WEATHER_AGENT_URL = "https://weather-agent-hef23kydta-uc.a.run.app"
 WEATHER_SSE_URL = f"{WEATHER_AGENT_URL}/sse"
 
 
