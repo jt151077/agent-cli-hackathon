@@ -1,7 +1,5 @@
-# agent-cli-hackathon
+# Simple root agent with 
 
-Simple ReAct agent
-Agent generated with `agents-cli` version `0.1.2`
 
 ## Architecture
 
