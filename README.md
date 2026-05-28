@@ -1,4 +1,4 @@
-# Travel Assistant Agent (ADK Silverfin)
+# EVALS
 
 This project implements a sophisticated travel assistant using the Google Agent Development Kit (ADK) and Gemini 2.5 Flash. It features a multi-agent architecture with specialized agents for tourism and search, integrated user memory, and safety filters.
 
