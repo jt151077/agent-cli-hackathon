@@ -1,4 +1,4 @@
-# agent-cli-hackathon
+# AGENT + MCP SERVICE
 
 Simple ReAct agent
 Agent generated with `agents-cli` version `0.1.2`
