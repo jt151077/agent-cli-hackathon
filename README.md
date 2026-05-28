@@ -1,4 +1,4 @@
-# agent-cli-hackathon
+# SIMPLE ROOT AGENT + SUB-AGENT
 
 Simple ReAct agent
 Agent generated with `agents-cli` version `0.1.2`
