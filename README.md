@@ -1,4 +1,4 @@
-# agent-cli-hackathon
+# ADK CALLBACKS
 
 Simple ReAct agent
 Agent generated with `agents-cli` version `0.1.2`
