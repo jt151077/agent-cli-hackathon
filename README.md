@@ -1,4 +1,4 @@
-# Simple root agent with 
+# SIMPLE ROOT AGENT
 
 
 ## Architecture
